@@ -15,7 +15,8 @@ abstract class RedBookDatabase: RoomDatabase() {
         fun getInstance(context: Context): RedBookDatabase =
             Room.databaseBuilder(
                 context, RedBookDatabase ::class.java, "book-database.db"
-            ).createFromAsset("").build()
+            ).createFromAsset("book-database.db").allowMainThreadQueries()
+                .build()
     }
     abstract fun natureDao(): NatureDao
 }

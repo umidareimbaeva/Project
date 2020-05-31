@@ -9,6 +9,7 @@ import com.google.android.material.navigation.NavigationView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.redbookproject.ui.animal.NatureFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                 else->{ return@setNavigationItemSelectedListener false}
             }
         }
+        supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, NatureFragment()).commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
