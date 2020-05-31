@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "book")
 data class Nature(
     @PrimaryKey val id: Int,
-    @ColumnInfo(name = "type") val type: String,
+    @ColumnInfo(name = "type") val type: Int,
     @ColumnInfo(name = "nameUzb") val nameUzb: String,
     @ColumnInfo(name = "nameRus") val nameRus: String,
     @ColumnInfo(name = "nameEng") val nameEng: String,
