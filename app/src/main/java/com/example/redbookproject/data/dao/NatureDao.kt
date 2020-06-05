@@ -6,6 +6,6 @@ import com.example.redbookproject.data.model.Nature
 
 @Dao
 interface NatureDao{
-    @Query("SELECT * FROM book")
-    fun getAllNature(): List<Nature>
+    @Query("SELECT * FROM book WHERE type = :type")
+    fun getAllNature(type: Int): List<Nature>
 }

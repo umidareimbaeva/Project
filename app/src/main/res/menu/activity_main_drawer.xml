@@ -5,16 +5,19 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_invertebrates"
+            android:title="Omirtqasizlar" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/nav_fishes"
+            android:title="Baliqlar" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_reptiles"
+            android:title="Jer bawirlawshilar" />
+        <item
+            android:id="@+id/nav_birds"
+            android:title="Quslar" />
+        <item
+            android:id="@+id/nav_mammals"
+            android:title="Su`t emiziwshiler" />
     </group>
 </menu>
