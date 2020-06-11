@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.redbookproject.data.model.Nature
 import kotlinx.android.synthetic.main.item.view.*
 
@@ -18,6 +19,10 @@ class NatureListAdapter: RecyclerView.Adapter<NatureListAdapter.NatureListViewHo
             itemView.tv_uzb_name.text = nature.nameUzb
             itemView.tv_rus_name.text = nature.nameRus
             itemView.tv_eng_name.text = nature.nameEng
+            val imageResource = "picture${nature.id}"
+            Glide.with(itemView).load(itemView.context.resources.getIdentifier(imageResource, "drawable", itemView.context.packageName)).into(itemView.img_avatar)
+//            itemView.img_avatar.setImageResource(itemView.context.resources.getIdentifier(imageResource,
+//                "drawable", itemView.context.packageName))
         }
     }
 
