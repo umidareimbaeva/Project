@@ -12,4 +12,12 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="home_second">Home Second</string>
+    <string name="tv_status">Status</string>
+    <string name="tv_propagation">Propagation</string>
+    <string name="tv_habitat">Habitat</string>
+    <string name="tv_quantity">Quantity</string>
+    <string name="tv_lifestyle">Lifestyle</string>
+    <string name="tv_limiting_factors">Limiting Factors</string>
+    <string name="tv_breeding">Breeding</string>
+    <string name="tv_security">Security</string>
 </resources>
