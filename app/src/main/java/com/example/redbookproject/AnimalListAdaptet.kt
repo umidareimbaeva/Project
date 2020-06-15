@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.redbookproject.data.model.Nature
+import com.example.redbookproject.ui.animal.NatureItemClicked
 import kotlinx.android.synthetic.main.item.view.*
 
-class NatureListAdapter: RecyclerView.Adapter<NatureListAdapter.NatureListViewHolder>(){
+class NatureListAdapter(private val itemClicked: NatureItemClicked): RecyclerView.Adapter<NatureListAdapter.NatureListViewHolder>(){
     var models: List<Nature> = listOf()
         set(value) {
             field = value
@@ -23,6 +24,9 @@ class NatureListAdapter: RecyclerView.Adapter<NatureListAdapter.NatureListViewHo
             Glide.with(itemView).load(itemView.context.resources.getIdentifier(imageResource, "drawable", itemView.context.packageName)).into(itemView.img_avatar)
 //            itemView.img_avatar.setImageResource(itemView.context.resources.getIdentifier(imageResource,
 //                "drawable", itemView.context.packageName))
+            itemView.setOnClickListener{
+                itemClicked.natureItemClick(nature.id)
+            }
         }
     }
 
