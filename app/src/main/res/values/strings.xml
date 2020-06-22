@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">RedBookProject</string>
+    <string name="app_name">Qizil Kitap</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">O`zbekistan Respublikasi Qizil Kitabi</string>
+    <string name="nav_header_subtitle">(o`zbek tilinde) </string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -20,4 +20,11 @@
     <string name="tv_limiting_factors">Limiting Factors</string>
     <string name="tv_breeding">Breeding</string>
     <string name="tv_security">Security</string>
+    <string name="bookmark">bookmark</string>
+    <string name="omirtqasizlar">Omirtqasizlar</string>
+    <string name="baliqlar">Baliqlar</string>
+    <string name="jer_bawirlawshilar">Jer bawirlawshilar</string>
+    <string name="quslar">Quslar</string>
+    <string name="su_t_emiziwshiler">Su`t emiziwshiler</string>
+    <string name="saylandilar">Saylandilar</string>
 </resources>

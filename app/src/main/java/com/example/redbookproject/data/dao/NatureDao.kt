@@ -2,6 +2,7 @@ package com.example.redbookproject.data.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Update
 import com.example.redbookproject.data.model.Nature
 
 @Dao
@@ -14,4 +15,10 @@ interface NatureDao{
 
     @Query("SELECT * FROM book WHERE type = :type and (nameEng like :word or nameUzb like :word or nameRus like :word)")
     fun searchNatureByName(type: Int, word: String): List<Nature>
+
+    @Update
+    fun updateNature(nature: Nature)
+
+    @Query("SELECT * FROM book WHERE isFavourite = :isFavourite")
+    fun isFavourite(isFavourite: Int): List<Nature>
 }

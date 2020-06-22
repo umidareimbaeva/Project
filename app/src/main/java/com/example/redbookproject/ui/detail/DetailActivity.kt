@@ -1,6 +1,7 @@
 package com.example.redbookproject.ui.detail
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -18,7 +19,7 @@ class DetailActivity : AppCompatActivity() {
     private var natureId = 0
     private lateinit var currentNature: Nature
     private lateinit var dao: NatureDao
-
+    lateinit var menuItem: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +27,13 @@ class DetailActivity : AppCompatActivity() {
 
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Details"
+
 
         dao = RedBookDatabase.getInstance(this).natureDao()
         natureId = intent.getIntExtra(NATURE_ID, 0)
         currentNature = dao.getSelectedNature(natureId)
+
+        supportActionBar?.title = currentNature.nameUzb
         tv_status_text.text = currentNature.status
         tv_propagation_text.text = currentNature.propagation
         tv_habitat_text.text = currentNature.habitat
@@ -44,13 +47,45 @@ class DetailActivity : AppCompatActivity() {
             .load(resources.getIdentifier("picture${natureId}", "drawable", packageName))
             .into(img_detail)
 
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> finish()
+            android.R.id.home -> {
+                finish()
+            }
+            R.id.bookmark-> {
+                setFavourite()
+                dao.updateNature(currentNature)
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    fun setFavourite(){
+        if(currentNature.isFavourite == null){
+            currentNature.isFavourite = 1
+            setFavouriteIcon()
+        }
+        else{
+            currentNature.isFavourite = 1 - currentNature.isFavourite!!
+            setFavouriteIcon()
+        }
+        dao.updateNature(currentNature)
+    }
+    private fun setFavouriteIcon(){
+        if(currentNature.isFavourite == 1){
+            menuItem.setIcon(R.drawable.bookmark)
+        }
+        else{
+            menuItem.setIcon(R.drawable.bookmark_empty)
+        }
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_detail, menu)
+        menuItem = menu!!.findItem(R.id.bookmark)
+        setFavouriteIcon()
+        return true
     }
 }
