@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import com.example.redbookproject.ui.animal.FavouriteFragment
 import com.example.redbookproject.ui.animal.NatureFragment
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         const val REPTILES = 3
         const val BIRDS = 4
         const val MAMMALS  = 5
+        const val IS_FAVOURITE = "is_favourite"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,40 +45,50 @@ class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener {
             val mfragment = NatureFragment()
             val mbundle = Bundle()
+            val fFragment = FavouriteFragment()
+            val fBundle = Bundle()
 
             when(it.itemId){
                 R.id.nav_invertebrates->{
                     mbundle.putInt(TYPE_ID, INVERTEBRATES)
                     mfragment.arguments = mbundle
+                    supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, mfragment).commit()
+                    drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.nav_fishes->{
                     mbundle.putInt(TYPE_ID, FISHES)
                     mfragment.arguments = mbundle
+                    supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, mfragment).commit()
+                    drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.nav_reptiles->{
                     mbundle.putInt(TYPE_ID, REPTILES)
                     mfragment.arguments = mbundle
+                    supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, mfragment).commit()
+                    drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.nav_birds->{
                     mbundle.putInt(TYPE_ID, BIRDS)
                     mfragment.arguments = mbundle
+                    supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, mfragment).commit()
+                    drawerLayout.closeDrawer(GravityCompat.START)
                     }
                 R.id.nav_mammals->{
                     mbundle.putInt(TYPE_ID, MAMMALS)
                     mfragment.arguments = mbundle
+                    supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, mfragment).commit()
+                    drawerLayout.closeDrawer(GravityCompat.START)
                    }
+                R.id.nav_favourite->{
+                    fBundle.putInt(IS_FAVOURITE, 1)
+                    fFragment.arguments = fBundle
+                    supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, fFragment).commit()
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
                 else-> return@setNavigationItemSelectedListener false
             }
-            supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, mfragment).commit()
-            drawerLayout.closeDrawer(GravityCompat.START)
             return@setNavigationItemSelectedListener true
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
     }
 
 }

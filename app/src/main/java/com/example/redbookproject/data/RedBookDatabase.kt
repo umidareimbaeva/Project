@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.redbookproject.data.dao.NatureDao
 import com.example.redbookproject.data.model.Nature
 
-@Database(entities = [Nature ::class], version = 1)
+@Database(entities = [Nature ::class], version = 2)
 abstract class RedBookDatabase: RoomDatabase() {
     companion object{
         private lateinit var INSTANCE: RedBookDatabase
