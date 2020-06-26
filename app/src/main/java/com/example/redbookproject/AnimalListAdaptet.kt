@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.redbookproject.data.model.Nature
-import com.example.redbookproject.ui.animal.NatureItemClicked
+import com.example.redbookproject.ui.nature.NatureItemClicked
 import kotlinx.android.synthetic.main.item.view.*
 
 class NatureListAdapter(private val itemClicked: NatureItemClicked): RecyclerView.Adapter<NatureListAdapter.NatureListViewHolder>(){

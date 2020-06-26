@@ -1,17 +1,16 @@
 package com.example.redbookproject
 
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.ActionBarDrawerToggle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import com.example.redbookproject.ui.animal.FavouriteFragment
-import com.example.redbookproject.ui.animal.NatureFragment
+import androidx.fragment.app.Fragment
+import com.example.redbookproject.ui.favourite.FavouriteFragment
+import com.example.redbookproject.ui.nature.NatureFragment
+import com.example.redbookproject.ui.nature.Presenter
 
 class MainActivity : AppCompatActivity() {
     companion object{
@@ -43,50 +42,44 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, fragment).commit()
 
         navView.setNavigationItemSelectedListener {
-            val mfragment = NatureFragment()
-            val mbundle = Bundle()
-            val fFragment = FavouriteFragment()
-            val fBundle = Bundle()
+            val myBundle = Bundle()
+            var myFragment: Fragment
 
             when(it.itemId){
                 R.id.nav_invertebrates->{
-                    mbundle.putInt(TYPE_ID, INVERTEBRATES)
-                    mfragment.arguments = mbundle
-                    supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, mfragment).commit()
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    myFragment = NatureFragment()
+                    myBundle.putInt(TYPE_ID, INVERTEBRATES)
+                    myFragment.arguments = myBundle
                 }
                 R.id.nav_fishes->{
-                    mbundle.putInt(TYPE_ID, FISHES)
-                    mfragment.arguments = mbundle
-                    supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, mfragment).commit()
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    myFragment = NatureFragment()
+                    myBundle.putInt(TYPE_ID, FISHES)
+                    myFragment.arguments = myBundle
                 }
                 R.id.nav_reptiles->{
-                    mbundle.putInt(TYPE_ID, REPTILES)
-                    mfragment.arguments = mbundle
-                    supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, mfragment).commit()
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    myFragment = NatureFragment()
+                    myBundle.putInt(TYPE_ID, REPTILES)
+                    myFragment.arguments = myBundle
                 }
                 R.id.nav_birds->{
-                    mbundle.putInt(TYPE_ID, BIRDS)
-                    mfragment.arguments = mbundle
-                    supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, mfragment).commit()
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    myFragment = NatureFragment()
+                    myBundle.putInt(TYPE_ID, BIRDS)
+                    myFragment.arguments = myBundle
                     }
                 R.id.nav_mammals->{
-                    mbundle.putInt(TYPE_ID, MAMMALS)
-                    mfragment.arguments = mbundle
-                    supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, mfragment).commit()
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    myFragment = NatureFragment()
+                    myBundle.putInt(TYPE_ID, MAMMALS)
+                    myFragment.arguments = myBundle
                    }
                 R.id.nav_favourite->{
-                    fBundle.putInt(IS_FAVOURITE, 1)
-                    fFragment.arguments = fBundle
-                    supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, fFragment).commit()
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    myFragment = FavouriteFragment()
+                    myBundle.putInt(IS_FAVOURITE, 1)
+                    myFragment.arguments = myBundle
                 }
                 else-> return@setNavigationItemSelectedListener false
             }
+            supportFragmentManager.beginTransaction().replace(R.id.fml_fragment, myFragment).commit()
+            drawerLayout.closeDrawer(GravityCompat.START)
             return@setNavigationItemSelectedListener true
         }
     }
