@@ -18,7 +18,10 @@
             android:title="@string/quslar" />
         <item
             android:id="@+id/nav_mammals"
-            android:title="@string/su_t_emiziwshiler" />
+            android:title="@string/sut_emiziwshiler" />
+    </group>
+
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_favourite"
             android:title="@string/saylandilar" />
