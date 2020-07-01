@@ -13,13 +13,14 @@ import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
     companion object {
-        val NATURE_ID = "natureId"
+        const val NATURE_ID = "natureId"
     }
 
     private var natureId = 0
-    private lateinit var currentNature: Nature
+    lateinit var currentNature: Nature
     private lateinit var dao: NatureDao
     lateinit var menuItem: MenuItem
+    lateinit var presenter: DetailPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,9 @@ class DetailActivity : AppCompatActivity() {
 
         dao = RedBookDatabase.getInstance(this).natureDao()
         natureId = intent.getIntExtra(NATURE_ID, 0)
-        currentNature = dao.getSelectedNature(natureId)
+        //currentNature = dao.getSelectedNature(natureId)
+        presenter = DetailPresenter(dao, this)
+        presenter.getSelectedNature(natureId)
 
         supportActionBar?.title = currentNature.nameUzb
         tv_status_text.text = currentNature.status
@@ -46,7 +49,6 @@ class DetailActivity : AppCompatActivity() {
         Glide.with(this)
             .load(resources.getIdentifier("picture${natureId}", "drawable", packageName))
             .into(img_detail)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -56,14 +58,14 @@ class DetailActivity : AppCompatActivity() {
             }
             R.id.bookmark-> {
                 setFavourite()
-                dao.updateNature(currentNature)
+                presenter.update(currentNature)
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
 
-    fun setFavourite(){
+    private fun setFavourite(){
         if(currentNature.isFavourite == null){
             currentNature.isFavourite = 1
             setFavouriteIcon()
@@ -72,7 +74,7 @@ class DetailActivity : AppCompatActivity() {
             currentNature.isFavourite = 1 - currentNature.isFavourite!!
             setFavouriteIcon()
         }
-        dao.updateNature(currentNature)
+        presenter.update(currentNature)
     }
     private fun setFavouriteIcon(){
         if(currentNature.isFavourite == 1){
