@@ -1,5 +1,4 @@
 package com.example.redbookproject.ui.detail
-
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -32,7 +31,6 @@ class DetailActivity : AppCompatActivity() {
 
         dao = RedBookDatabase.getInstance(this).natureDao()
         natureId = intent.getIntExtra(NATURE_ID, 0)
-        //currentNature = dao.getSelectedNature(natureId)
         presenter = DetailPresenter(dao, this)
         presenter.getSelectedNature(natureId)
 

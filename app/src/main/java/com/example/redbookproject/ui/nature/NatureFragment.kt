@@ -15,12 +15,17 @@ import com.example.redbookproject.data.model.Nature
 import com.example.redbookproject.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.fragment_nature.*
 
-class NatureFragment : Fragment(R.layout.fragment_nature), NatureItemClicked, Presenter {
-    private val adapter: NatureListAdapter = NatureListAdapter(this)
+class NatureFragment : Fragment(R.layout.fragment_nature){
+    private val adapter: NatureListAdapter = NatureListAdapter()
     private lateinit var dao: NatureDao
     private lateinit var presenter: NaturePresenter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter.setOnItemClickListener {
+            val mIntent = Intent(requireActivity(), DetailActivity:: class.java)
+            mIntent.putExtra(DetailActivity.NATURE_ID, it)
+            startActivity(mIntent)
+        }
         rcv_recycler.adapter = adapter
         rcv_recycler.addItemDecoration(
             DividerItemDecoration(
@@ -30,7 +35,10 @@ class NatureFragment : Fragment(R.layout.fragment_nature), NatureItemClicked, Pr
         )
         val type = arguments?.getInt(MainActivity.TYPE_ID) ?: 1
         dao = RedBookDatabase.getInstance(requireContext()).natureDao()
-        presenter = NaturePresenter(dao, this)
+        presenter = NaturePresenter(dao)
+        presenter.setDataFunction {
+            adapter.models = it
+        }
         presenter.getAllNature(type)
 
         et_search.addTextChangedListener{
@@ -42,13 +50,10 @@ class NatureFragment : Fragment(R.layout.fragment_nature), NatureItemClicked, Pr
 //    private fun setData(type: Int) {
 //        adapter.models = dao.getAllNature(type)
 //    }
-    override fun setData(models: List<Nature>){
-        adapter.models = models
-}
 
-    override fun natureItemClick(id: Int) {
-        val mIntent = Intent(requireActivity(), DetailActivity:: class.java)
-        mIntent.putExtra(DetailActivity.NATURE_ID, id)
-        startActivity(mIntent)
-    }
+//    override fun natureItemClick(id: Int) {
+//        val mIntent = Intent(requireActivity(), DetailActivity:: class.java)
+//        mIntent.putExtra(DetailActivity.NATURE_ID, id)
+//        startActivity(mIntent)
+//    }
 }
