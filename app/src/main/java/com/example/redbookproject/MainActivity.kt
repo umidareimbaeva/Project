@@ -10,7 +10,6 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.example.redbookproject.ui.favourite.FavouriteFragment
 import com.example.redbookproject.ui.nature.NatureFragment
-import com.example.redbookproject.ui.nature.Presenter
 
 class MainActivity : AppCompatActivity() {
     companion object{

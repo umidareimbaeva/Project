@@ -6,15 +6,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.redbookproject.data.model.Nature
-import com.example.redbookproject.ui.nature.NatureItemClicked
 import kotlinx.android.synthetic.main.item.view.*
 
-class NatureListAdapter(private val itemClicked: NatureItemClicked): RecyclerView.Adapter<NatureListAdapter.NatureListViewHolder>(){
+class NatureListAdapter(): RecyclerView.Adapter<NatureListAdapter.NatureListViewHolder>(){
     var models: List<Nature> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+    var onItemClick: (natureId: Int) -> Unit = {
+        println("onItemClick hasn't been realized")
+    }
+
+    fun setOnItemClickListener(onItemClick: (natureId: Int) -> Unit){
+        this.onItemClick = onItemClick
+    }
+
     inner class NatureListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun populateModel(nature: Nature){
             itemView.tv_uzb_name.text = nature.nameUzb
@@ -25,7 +32,7 @@ class NatureListAdapter(private val itemClicked: NatureItemClicked): RecyclerVie
 //            itemView.img_avatar.setImageResource(itemView.context.resources.getIdentifier(imageResource,
 //                "drawable", itemView.context.packageName))
             itemView.setOnClickListener{
-                itemClicked.natureItemClick(nature.id)
+                onItemClick.invoke(nature.id)
             }
         }
     }

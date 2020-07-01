@@ -1,10 +1,18 @@
 package com.example.redbookproject.ui.favourite
 
 import com.example.redbookproject.data.dao.NatureDao
-import com.example.redbookproject.ui.nature.Presenter
+import com.example.redbookproject.data.model.Nature
 
-class FavouritePresenter(private val dao: NatureDao, private val view: Presenter) {
+class FavouritePresenter(private val dao: NatureDao) {
+    private var setData: (models: List<Nature>) -> Unit = {
+        println("")
+    }
+
+    fun setDataFunction(setData: (models:List<Nature>) -> Unit){
+        this.setData = setData
+    }
+
     fun isFavourite(isFavourite: Int){
-        view.setData(dao.isFavourite(isFavourite))
+        setData.invoke(dao.isFavourite(isFavourite))
     }
 }
