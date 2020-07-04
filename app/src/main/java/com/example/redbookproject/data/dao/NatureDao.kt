@@ -19,6 +19,6 @@ interface NatureDao{
     @Update
     fun updateNature(nature: Nature)
 
-    @Query("SELECT * FROM book WHERE isFavourite = :isFavourite")
-    fun isFavourite(isFavourite: Int): List<Nature>
+    @Query("SELECT * FROM book WHERE isFavourite = 1")
+    fun isFavourite(): List<Nature>
 }

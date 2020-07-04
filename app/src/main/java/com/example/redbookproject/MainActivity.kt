@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         navView.setNavigationItemSelectedListener {
             val myBundle = Bundle()
-            var myFragment: Fragment
+            val myFragment: Fragment
 
             when(it.itemId){
                 R.id.nav_invertebrates->{

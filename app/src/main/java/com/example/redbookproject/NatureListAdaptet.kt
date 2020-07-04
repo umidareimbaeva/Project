@@ -8,15 +8,13 @@ import com.bumptech.glide.Glide
 import com.example.redbookproject.data.model.Nature
 import kotlinx.android.synthetic.main.item.view.*
 
-class NatureListAdapter(): RecyclerView.Adapter<NatureListAdapter.NatureListViewHolder>(){
+class NatureListAdapter: RecyclerView.Adapter<NatureListAdapter.NatureListViewHolder>(){
     var models: List<Nature> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
-    var onItemClick: (natureId: Int) -> Unit = {
-        println("onItemClick hasn't been realized")
-    }
+    var onItemClick: (natureId: Int) -> Unit = {}
 
     fun setOnItemClickListener(onItemClick: (natureId: Int) -> Unit){
         this.onItemClick = onItemClick

@@ -12,7 +12,7 @@ class FavouritePresenter(private val dao: NatureDao) {
         this.setData = setData
     }
 
-    fun isFavourite(isFavourite: Int){
-        setData.invoke(dao.isFavourite(isFavourite))
+    fun isFavourite(){
+        setData.invoke(dao.isFavourite())
     }
 }

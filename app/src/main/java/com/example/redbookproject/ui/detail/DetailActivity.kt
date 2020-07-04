@@ -10,7 +10,7 @@ import com.example.redbookproject.data.dao.NatureDao
 import com.example.redbookproject.data.model.Nature
 import kotlinx.android.synthetic.main.activity_detail.*
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), DetailView {
     companion object {
         const val NATURE_ID = "natureId"
     }
@@ -18,7 +18,7 @@ class DetailActivity : AppCompatActivity() {
     private var natureId = 0
     lateinit var currentNature: Nature
     private lateinit var dao: NatureDao
-    lateinit var menuItem: MenuItem
+    private lateinit var menuItem: MenuItem
     lateinit var presenter: DetailPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,20 +33,6 @@ class DetailActivity : AppCompatActivity() {
         natureId = intent.getIntExtra(NATURE_ID, 0)
         presenter = DetailPresenter(dao, this)
         presenter.getSelectedNature(natureId)
-
-        supportActionBar?.title = currentNature.nameUzb
-        tv_status_text.text = currentNature.status
-        tv_propagation_text.text = currentNature.propagation
-        tv_habitat_text.text = currentNature.habitat
-        tv_quantity_text.text = currentNature.quantity
-        tv_lifestyle_text.text = currentNature.lifestyle
-        tv_limiting_factors_text.text = currentNature.limitingFactors
-        tv_breeding_text.text = currentNature.breeding
-        tv_security_text.text = currentNature.security
-
-        Glide.with(this)
-            .load(resources.getIdentifier("picture${natureId}", "drawable", packageName))
-            .into(img_detail)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -87,5 +73,22 @@ class DetailActivity : AppCompatActivity() {
         menuItem = menu!!.findItem(R.id.bookmark)
         setFavouriteIcon()
         return true
+    }
+
+    override fun setDetailInfo(nature: Nature) {
+        currentNature = nature
+        supportActionBar?.title = currentNature.nameUzb
+        tv_status_text.text = nature.status
+        tv_propagation_text.text = nature.propagation
+        tv_habitat_text.text = nature.habitat
+        tv_quantity_text.text = nature.quantity
+        tv_lifestyle_text.text = nature.lifestyle
+        tv_limiting_factors_text.text = nature.limitingFactors
+        tv_breeding_text.text = nature.breeding
+        tv_security_text.text = nature.security
+
+        Glide.with(this)
+            .load(resources.getIdentifier("picture${natureId}", "drawable", packageName))
+            .into(img_detail)
     }
 }

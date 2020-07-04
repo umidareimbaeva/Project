@@ -37,11 +37,10 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite){
 
     override fun onStart() {
         super.onStart()
-        val isFavourite = arguments?.getInt(MainActivity.IS_FAVOURITE) ?: 0
         presenter.setDataFunction {
             adapter.models = it
         }
-        presenter.isFavourite(isFavourite)
+        presenter.isFavourite()
     }
 
 }
